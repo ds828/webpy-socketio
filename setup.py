@@ -10,9 +10,9 @@ setup(
     description = ("A web.py app providing the features required to use "
                    "websockets with web.py via Socket.IO"),
     long_description = open("README.rst").read(),
-    url = "http://github.com/stephenmcd/django-socketio",
+    url = "https://github.com/songdi/webpy-socketio",
     py_modules=["webpy_socketio",],
-    install_requires=["gevent-socketio==0.2.1", "web.py"],
+    install_requires=["gevent-socketio==0.2.1", "web.py>=0.36"],
     zip_safe = False,
     include_package_data = True,
     packages = find_packages(),
