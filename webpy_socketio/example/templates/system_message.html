@@ -1,0 +1,29 @@
+<%inherit file="base.html"/>
+
+<%block name="extra_js" >
+<script>$(showForm);</script>
+</%block>
+
+<p>${message}</p>
+
+${session.items()}
+
+<%block name="form">
+<form method="post">
+    <input type="text" id="message" name="message">
+    <label for="room">Room:</label>
+    <select id="room" name="room">
+        <option value="">All Rooms</option>
+        % for room in rooms:
+        <option 
+			% if selected_room == str(room.id): 
+				selected 
+			% endif
+            value="${room.id}">${room.name}</option>
+        % endfor
+    </select>
+    <input type="submit" id="submit" value="Send">
+	<%namespace file="components.html" import="csrf"/>
+	${csrf()}
+</form>
+</%block>
