@@ -19,11 +19,9 @@
 #       along with this program; if not, write to the Free Software
 #       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #       MA 02110-1301, USA.
-import sys
-sys.path.append("../..")
 
 import web
-from settings import chat_db, my_render, csrf_protected, notfound, internalerror
+from settings import chat_db, my_render, csrf_protected, notfound, internalerror,session_dir
 #import socketio libs
 from socketio import SocketIOServer
 from gevent import monkey 
@@ -47,12 +45,12 @@ app.internalerror = internalerror
 
 if web.config.debug:
 	if web.config.get('_session') is None:
-		session = web.session.Session(app, web.session.DiskStore('sessions'))
+		session = web.session.Session(app, web.session.DiskStore(session_dir))
 		web.config._session = session
 	else:
 		session = web.config._session
 else:	
-	session = web.session.Session(app, web.session.DiskStore('sessions'))
+	session = web.session.Session(app, web.session.DiskStore(session_dir))
 
 #share session with sub-app    
 def session_hook():
@@ -129,5 +127,5 @@ application = app.wsgifunc()
 import events
 
 if __name__ == "__main__":
-
+	print 'Listening on http://127.0.0.1:%s and on port 843 (flash policy server)' % SOCKETIO_PORT
 	SocketIOServer((SOCKETIO_HOST, SOCKETIO_PORT), application, resource="socket.io").serve_forever()

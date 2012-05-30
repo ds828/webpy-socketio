@@ -24,6 +24,10 @@ import web
 import os
 from web.contrib.template import render_mako
 
+current_dir = os.path.abspath(os.path.dirname(__file__))
+session_dir = os.path.join(current_dir,"sessions")
+template_dir = os.path.join(current_dir,"templates")
+
 ##################################################
 #
 #
@@ -32,11 +36,9 @@ from web.contrib.template import render_mako
 #
 ##################################################
 
-curdir = os.path.abspath(os.path.dirname(__file__))
-
 DATABASE_ARGS = {
 	"dbn": "sqlite", 
-	"db": os.path.join(curdir,"chat.db"),
+	"db": os.path.join(current_dir,"chat.db"),
 	"check_same_thread":False,
 	#avoid dead lock
 	"isolation_level":"IMMEDIATE",
@@ -63,7 +65,7 @@ chat_db = web.database(**DATABASE_ARGS)
 ##################################################
 
 render = render_mako(
-        directories=['templates'],
+        directories=[template_dir],
         input_encoding='utf-8',
         output_encoding='utf-8',
         )
