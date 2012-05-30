@@ -295,7 +295,7 @@ directory of the ``webpy_socketio`` package.
 Working with nginx
 ==================
 
-  * Recomplie nginx with ``nginx_tcp_proxy_module``.
+  * Recomplie nginx with ``nginx_tcp_proxy_module``::
      $ sudo nginx -V::
      
     For my system (Debian squeeze), I see below::
@@ -362,6 +362,5 @@ Working with nginx
 	        proxy_pass http://socketio_server;
         }
        }
-      }
 
    reference: ``http://readthedocs.org/docs/django-socketio/en/latest/#installation``
