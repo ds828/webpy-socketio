@@ -275,13 +275,13 @@ Logging
 
 The following setting can be used to configure logging:
 
-    * ``SOCKETIO_MESSAGE_LOG_FORMAT`` - A format string used for logging
-      each message sent via a socket. The string is formatted using
-      interpolation with a dictionary. The dictionary contains all the
-      keys found in webpy's ``web.ctx.env``, as well as ``TIME``
-      and ``MESSAGE`` keys which contain the time of the message and
-      the message contents respectively. Set this setting to ``None``
-      to disable message logging.
+  * ``SOCKETIO_MESSAGE_LOG_FORMAT`` - A format string used for logging
+    each message sent via a socket. The string is formatted using
+    interpolation with a dictionary. The dictionary contains all the
+    keys found in webpy's ``web.ctx.env``, as well as ``TIME``
+    and ``MESSAGE`` keys which contain the time of the message and
+    the message contents respectively. Set this setting to ``None``
+    to disable message logging.
 
 Chat Demo
 =========
@@ -295,24 +295,24 @@ directory of the ``webpy_socketio`` package.
 Working with nginx
 ====================
 
-	* Recomplie nginx with nginx_tcp_proxy_module.
+  * Recomplie nginx with nginx_tcp_proxy_module.
      $ sudo nginx -V
      
-     You may be see below:
+    You may be see below:
      
      $ configure arguments: --prefix=/etc/nginx/ --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-mail --with-mail_ssl_module --with-file-aio --with-ipv6
 
-    * Download ngnix source from http://nginx.org/en/download.html
-    * Download nginx_tcp_proxy_module from https://github.com/yaoweibin/nginx_tcp_proxy_module
-    * Unzip nginx_tcp_proxy_module.zip
-	* Do follow
+  * Download ngnix source from http://nginx.org/en/download.html
+  * Download nginx_tcp_proxy_module from https://github.com/yaoweibin/nginx_tcp_proxy_module
+  * Unzip nginx_tcp_proxy_module.zip
+  * Do follow
      $ cd nginx-src-dir
      $ patch -p1 < /path/to/nginx_tcp_proxy_module/tcp.patch
      $ ./configure before_configure_arguments_with_nginx_-V --add-module=/path/to/nginx_tcp_proxy_module
      $ make
      $ sudo make install
 
-    * Edit /etc/nginx/nginx.conf
+  * Edit /etc/nginx/nginx.conf
 
      tcp {
        upstream websocket {
@@ -324,14 +324,14 @@ Working with nginx
      } 
      http{
 	       ...
-
-	* If not exists, add /etc/nginx/proxy_params
+  
+  * If not exists, add /etc/nginx/proxy_params
      
      proxy_set_header Host $host;
      proxy_set_header X-Real-IP $remote_addr;
      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
-	* Touch /etc/nginx/conf.d/your_app.conf
+  * Touch /etc/nginx/conf.d/your_app.conf
 
      upstream socketio_server {
         # For a TCP configuration:
@@ -342,7 +342,7 @@ Working with nginx
         # server unix:/tmp/yourappserver.sock fail_timeout=0;
         }
 
-    server {
+     server {
         listen 80;
         client_max_body_size 4G;
         #server_name _;
@@ -360,7 +360,7 @@ Working with nginx
 	        include proxy_params;
 	        proxy_pass http://socketio_server;
         }
-    }
-}
+       }
+      }
 
-reference: http://readthedocs.org/docs/django-socketio/en/latest/#installation
+   reference: http://readthedocs.org/docs/django-socketio/en/latest/#installation
